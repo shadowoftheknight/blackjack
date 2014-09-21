@@ -15,9 +15,19 @@ import my.delightful.project.blackjack.stack.Deck;
  */
 abstract class Shuffle {
      ArrayList<Card> cards = new ArrayList<>(52);
-     
+    
+     Shuffle(){
+         System.out.println("Shuffle Type " + this.getClass().getSimpleName());
+     }
     static Shuffle getType(int i) {
-        return new BasicShuffle();
+        switch(i){
+            case 1:return new BasicShuffle();
+            case 2:return new AnotherShuffle();
+            default:
+                return new BasicShuffle();
+             
+        }
+        
     }
     
     public abstract ArrayList doIt(Deck[] decks);

@@ -101,4 +101,24 @@ public class Card {
     public String getName() {
         return cardType.name() + " of " + this.suite.getName();
     }
+
+    @Override
+    public int hashCode() {
+        int hash = getDNA();
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Card other = (Card) obj;
+        return true;
+    }
+    
+    
 }

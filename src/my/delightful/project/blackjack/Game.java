@@ -6,6 +6,7 @@
 package my.delightful.project.blackjack;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import my.delightful.project.blackjack.player.Player;
 import my.delightful.project.blackjack.stack.Card;
 import my.delightful.project.blackjack.stack.Deck;
@@ -24,7 +25,7 @@ class Game {
    
     Game(int NO_OF_PLAYERS, int NO_OF_PACKS, int TYPE_OF_SHUFFLE) {
         this.players = new ArrayList(NO_OF_PLAYERS);
-        shuffle = Shuffle.getType(1);
+        shuffle = Shuffle.getType(TYPE_OF_SHUFFLE);
         packs = new Pack[NO_OF_PACKS];
         for(int i =0; i < NO_OF_PACKS; i++ ){
             packs[i]=new Pack();
@@ -36,6 +37,7 @@ class Game {
         if(shuffled == false){
             for(Pack p:packs){
                 cards.addAll( shuffle.doIt(p.getDecks()));
+                Collections.shuffle(cards);
             }
             System.out.println("Shuffled " + cards.size() + " cards");
             shuffled = true;
