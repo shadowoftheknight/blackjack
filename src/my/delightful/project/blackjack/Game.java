@@ -19,15 +19,25 @@ class Game {
     private ArrayList<Card> cards = new ArrayList(52);
     private ArrayList<Player> players;
     private int numberOfCards;
-       
-    public Game(int _playerAmount){
-       this.players = new ArrayList(_playerAmount);
+    Shuffle shuffle; Pack[] packs;
+    
+   
+    Game(int NO_OF_PLAYERS, int NO_OF_PACKS, int TYPE_OF_SHUFFLE) {
+        this.players = new ArrayList(NO_OF_PLAYERS);
+        shuffle = Shuffle.getType(1);
+        packs = new Pack[NO_OF_PACKS];
+        for(int i =0; i < NO_OF_PACKS; i++ ){
+            packs[i]=new Pack();
+        }
     }
-    Card dealCard(Shuffle shuffle, Pack pack, int numberOfCards) {
+    Card dealCard(Shuffle shuffle, Pack[] packs, int numberOfCards) {
         numberOfCards = this.numberOfCards;
        
         if(shuffled == false){
-            cards = shuffle.doIt(pack.getDecks());
+            for(Pack p:packs){
+                cards.addAll( shuffle.doIt(p.getDecks()));
+            }
+            System.out.println("Shuffled " + cards.size() + " cards");
             shuffled = true;
         }
         
@@ -40,10 +50,10 @@ class Game {
         return card;
     }
 
-    public ArrayList<Card> dealHand(Shuffle shuffle, Pack pack, int _i) {
+    public ArrayList<Card> dealHand(int _i) {
        ArrayList<Card> hand =  new ArrayList(numberOfCards);
        for(int i=0; i < _i;i++){
-           hand.add(dealCard(shuffle,pack,_i));
+           hand.add(dealCard(shuffle,packs,_i));
        }
        return hand;
     }
@@ -101,6 +111,7 @@ class Game {
         }        
         return true;
     }
+
 
 
     

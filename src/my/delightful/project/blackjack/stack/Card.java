@@ -30,7 +30,7 @@ public class Card {
                 break;
             case JACK: value = 10;
                 break;
-            case ACE: value = 1;
+            case ACE: value = 10;
                 break;
             case TWO: value = 2;
                 break;
